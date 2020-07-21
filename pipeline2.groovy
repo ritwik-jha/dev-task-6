@@ -64,7 +64,7 @@ job('devt6-pvc-launch') {
     steps {
             shell('sudo cp -fv pvc.yml /root/task6_kube')
             shell('sudo cd /root/task6_kube')
-            shell('sudo if sudo kubectl get pvc | grep task3-pvc;then;sudo echo "pvc running";else;sudo kubectl create -f pvc.yml')
+            shell('sudo if sudo kubectl get pvc | grep task3-pvc;then;sudo echo "pvc running";else;sudo kubectl create -f pvc.yml;fi')
             }
 
     }
@@ -85,7 +85,7 @@ job('devt6-deployment-launch') {
                 steps {
                     shell('sudo cp -v deployment.yml /root/task6_kube')
                     shell('sudo cd /root/task6_kube')
-                    shell('sudo if sudo kubectl get deploy | grep task3-web-deploy;then;sudo kubectl replace -f deployment.yml;else; sudo kubectl create -f deployment.yml')
+                    shell('sudo if sudo kubectl get deploy | grep task3-web-deploy;then;sudo kubectl replace -f deployment.yml;else; sudo kubectl create -f deployment.yml;fi')
                 }
             }
         
@@ -105,7 +105,7 @@ job('devt6-service-launch') {
                 steps {
                     shell('sudo cp -v service.yml /root/task6_kube')
                     shell('sudo cd /root/task6_kube')
-                    shell('sudo if sudo kubectl get svc | grep task3-service;then;sudo echo "service running";else;sudo kubectl create -f service.yml')
+                    shell('sudo if sudo kubectl get svc | grep task3-service;then;sudo echo "service running";else;sudo kubectl create -f service.yml;fi')
                 }
             }
         
@@ -120,7 +120,7 @@ job('devt6-site-check') {
 
                 steps {
                     shell('sudo x=$(curl -o /dev/null -sw "%{http_code}" 192.168.99.100:30001/code.php)')
-                    shell('sudo if [echo $x -eq 200];then;sudo echo "site running properly";else;sudo echo "site not running properly and sending e-mail";sudo /root/task_2/email.py')            
+                    shell('sudo if [echo $x -eq 200];then;sudo echo "site running properly";else;sudo echo "site not running properly and sending e-mail";sudo /root/task_2/email.py;fi')            
                 }
             }
         
